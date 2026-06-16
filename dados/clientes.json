@@ -1,0 +1,79 @@
+[
+    {
+        "id_cliente": 1,
+        "nome": "Ana Paula Souza",
+        "cpf": "11122233344",
+        "telefone": "(11) 91111-0001",
+        "ativo": true
+    },
+    {
+        "id_cliente": 2,
+        "nome": "Bruno Ferreira Lima",
+        "cpf": "22233344455",
+        "telefone": "(11) 92222-0002",
+        "ativo": true
+    },
+    {
+        "id_cliente": 3,
+        "nome": "Carla Mendes Rocha",
+        "cpf": "33344455566",
+        "telefone": "(21) 93333-0003",
+        "ativo": true
+    },
+    {
+        "id_cliente": 4,
+        "nome": "Diego Oliveira Cruz",
+        "cpf": "44455566677",
+        "telefone": "(31) 94444-0004",
+        "ativo": true
+    },
+    {
+        "id_cliente": 5,
+        "nome": "Elaine Costa Pires",
+        "cpf": "55566677788",
+        "telefone": "(41) 95555-0005",
+        "ativo": true
+    },
+    {
+        "id_cliente": 6,
+        "nome": "Fábio Alves Martins",
+        "cpf": "66677788899",
+        "telefone": "(51) 96666-0006",
+        "ativo": true
+    },
+    {
+        "id_cliente": 7,
+        "nome": "Gabriela Nunes Dias",
+        "cpf": "77788899900",
+        "telefone": "(61) 97777-0007",
+        "ativo": true
+    },
+    {
+        "id_cliente": 8,
+        "nome": "Henrique Borges Tal",
+        "cpf": "88899900011",
+        "telefone": "(71) 98888-0008",
+        "ativo": true
+    },
+    {
+        "id_cliente": 9,
+        "nome": "Isabela Moura Leal",
+        "cpf": "99900011122",
+        "telefone": "(81) 99999-0009",
+        "ativo": true
+    },
+    {
+        "id_cliente": 10,
+        "nome": "João Pedro Ramos",
+        "cpf": "00011122233",
+        "telefone": "(91) 90000-0010",
+        "ativo": true
+    },
+    {
+        "id_cliente": 11,
+        "nome": "gabriel",
+        "cpf": "12345678910",
+        "telefone": "",
+        "ativo": true
+    }
+]
