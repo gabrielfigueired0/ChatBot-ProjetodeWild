@@ -34,9 +34,10 @@ def gerar_relatorio_cliente(cpf, pedidos):
         p for p in pedidos if p["cpf_cliente"] == cpf
     ]
 
-    if not pedidos_cliente:
-        print("Nenhum pedido encontrado.")
-        return
+    match pedidos_cliente:
+        case []:
+            print("Nenhum pedido encontrado.")
+            return
 
     caminho = f"relatorios/relatorio_{cpf}.txt"
 
@@ -50,5 +51,4 @@ def gerar_relatorio_cliente(cpf, pedidos):
             arquivo.write(f"Total: R$ {pedido['total']:.2f}\n")
             arquivo.write("-" * 30 + "\n")
 
-    print(f"\nRelatório salvo em: {caminho}")
     print(f"\nRelatório salvo em: {caminho}")

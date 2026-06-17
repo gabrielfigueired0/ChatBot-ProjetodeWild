@@ -75,5 +75,12 @@
         "cpf": "12345678910",
         "telefone": "",
         "ativo": true
+    },
+    {
+        "id_cliente": 12,
+        "nome": "geronimo",
+        "cpf": "11223344556",
+        "telefone": "",
+        "ativo": true
     }
 ]

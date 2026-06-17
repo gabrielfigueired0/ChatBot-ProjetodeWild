@@ -8,9 +8,11 @@ def _normalizar(texto):
 
 
 def _proximo_codigo(pedidos):
-    if not pedidos:
-        return 1
-    return max(p["codigo"] for p in pedidos) + 1
+    match pedidos:
+        case []:
+            return 1
+        case _:
+            return max(p["codigo"] for p in pedidos) + 1
 
 
 def pedido_novo(pedidos, clientes, produtos):
@@ -24,10 +26,11 @@ def pedido_novo(pedidos, clientes, produtos):
             cliente_encontrado = c
             break
 
-    if not cliente_encontrado:
-        print("\n   BLOQUEADO: cliente não cadastrado. Cadastre o cliente primeiro.")
-        pausar()
-        return
+    match cliente_encontrado:
+        case None:
+            print("\n   BLOQUEADO: cliente não cadastrado. Cadastre o cliente primeiro.")
+            pausar()
+            return
 
     # 2. Busca produto por palavra-chave
     print(f"\n  Cliente: {cliente_encontrado['nome']}")
@@ -42,14 +45,14 @@ def pedido_novo(pedidos, clientes, produtos):
     while not produto_encontrado:
         busca = input("\n  Digite o nome ou palavra-chave do produto (ou 'sair'): ").strip().lower()
 
-        if busca == "sair":
-            print("  Pedido cancelado.")
-            pausar()
-            return
-
-        if not busca:
-            print("   Digite ao menos uma palavra-chave.")
-            continue
+        match busca:
+            case "sair":
+                print("  Pedido cancelado.")
+                pausar()
+                return
+            case "":
+                print("   Digite ao menos uma palavra-chave.")
+                continue
 
         # Filtra produtos cujo nome contenha qualquer palavra da busca (ignora acentos)
         palavras = _normalizar(busca).split()
@@ -58,9 +61,10 @@ def pedido_novo(pedidos, clientes, produtos):
             if any(palavra in _normalizar(p["nome"]) for palavra in palavras)
         ]
 
-        if not resultados:
-            print(f"   Nenhum produto encontrado para '{busca}'. Tente outra palavra.")
-            continue
+        match resultados:
+            case []:
+                print(f"   Nenhum produto encontrado para '{busca}'. Tente outra palavra.")
+                continue
 
         # Exibe os resultados encontrados
         print(f"\n  {len(resultados)} produto(s) encontrado(s):")
@@ -74,12 +78,14 @@ def pedido_novo(pedidos, clientes, produtos):
             try:
                 escolha = input(f"  Escolha o número do produto (1-{len(resultados)}) ou 0 para buscar novamente: ").strip()
                 num = int(escolha)
-                if num == 0:
-                    break
-                if 1 <= num <= len(resultados):
-                    produto_encontrado = resultados[num - 1]
-                    break
-                print(f"   Número inválido. Digite entre 1 e {len(resultados)}.")
+                match num:
+                    case 0:
+                        break
+                    case n if 1 <= n <= len(resultados):
+                        produto_encontrado = resultados[n - 1]
+                        break
+                    case _:
+                        print(f"   Número inválido. Digite entre 1 e {len(resultados)}.")
             except ValueError:
                 print("   Digite apenas o número da opção.")
 
@@ -91,15 +97,15 @@ def pedido_novo(pedidos, clientes, produtos):
         pausar()
         return
 
-    if qtd <= 0:
-        print("   A quantidade deve ser maior que zero.")
-        pausar()
-        return
-
-    if qtd > produto_encontrado["estoque"]:
-        print(f"   BLOQUEADO: estoque insuficiente! Disponível: {produto_encontrado['estoque']} unidade(s).")
-        pausar()
-        return
+    match qtd:
+        case q if q <= 0:
+            print("   A quantidade deve ser maior que zero.")
+            pausar()
+            return
+        case q if q > produto_encontrado["estoque"]:
+            print(f"   BLOQUEADO: estoque insuficiente! Disponível: {produto_encontrado['estoque']} unidade(s).")
+            pausar()
+            return
 
     # 4. Registra pedido
     produto_encontrado["estoque"] -= qtd
@@ -128,19 +134,21 @@ def pedido_novo(pedidos, clientes, produtos):
 def pedido_rastrear(pedidos):
     cabecalho("Rastrear Pedidos por CPF")
 
-    if not pedidos:
-        print("   Nenhum pedido registrado no sistema ainda.")
-        pausar()
-        return
+    match pedidos:
+        case []:
+            print("   Nenhum pedido registrado no sistema ainda.")
+            pausar()
+            return
 
     cpf_busca = input("  CPF do cliente: ").strip()
 
     pedidos_cliente = [p for p in pedidos if p["cpf_cliente"] == cpf_busca]
 
-    if not pedidos_cliente:
-        print("   Nenhum pedido encontrado para este CPF.")
-        pausar()
-        return
+    match pedidos_cliente:
+        case []:
+            print("   Nenhum pedido encontrado para este CPF.")
+            pausar()
+            return
 
     nome_cliente = pedidos_cliente[-1]["nome_cliente"]
     print(f"\n  Cliente: {nome_cliente}")
@@ -160,15 +168,16 @@ def pedido_rastrear(pedidos):
     print(f"  Status    : {mais_recente['status']}")
 
     # ── Pedidos anteriores ────────────────────────────────
-    if anteriores:
-        linha()
-        print("  PEDIDOS ANTERIORES")
-        linha()
-        print(f"  {'Nº':<6} {'Produto':<26} {'Qtd':<5} {'Total':<11} Status")
-        linha()
-        for p in reversed(anteriores):
-            print(f"  #{p['codigo']:<5} {p['nome_produto']:<26} {p['quantidade']:<5} "
-                  f"R$ {p['total']:<8.2f} {p['status']}")
+    match anteriores:
+        case [_, *_]:
+            linha()
+            print("  PEDIDOS ANTERIORES")
+            linha()
+            print(f"  {'Nº':<6} {'Produto':<26} {'Qtd':<5} {'Total':<11} Status")
+            linha()
+            for p in reversed(anteriores):
+                print(f"  #{p['codigo']:<5} {p['nome_produto']:<26} {p['quantidade']:<5} "
+                      f"R$ {p['total']:<8.2f} {p['status']}")
 
     linha()
     pausar()
@@ -177,19 +186,21 @@ def pedido_rastrear(pedidos):
 def pedido_cancelar(clientes, pedidos):
     cabecalho("Cancelar Pedido")
 
-    if not pedidos:
-        print("   Nenhum pedido registrado no sistema ainda.")
-        pausar()
-        return
+    match pedidos:
+        case []:
+            print("   Nenhum pedido registrado no sistema ainda.")
+            pausar()
+            return
 
     # --- 1. Busca cliente pelo CPF ---
     cpf = input("   CPF do cliente (somente números): ").strip()
     cliente = next((c for c in clientes if c["cpf"] == cpf), None)
 
-    if not cliente:
-        print("   Cliente não encontrado no sistema.")
-        pausar()
-        return
+    match cliente:
+        case None:
+            print("   Cliente não encontrado no sistema.")
+            pausar()
+            return
 
     # --- 2. Busca pedidos ativos do cliente ---
     pedidos_do_cliente = [
@@ -197,10 +208,11 @@ def pedido_cancelar(clientes, pedidos):
         if p.get("cpf_cliente") == cpf and p["status"] != "Cancelado"
     ]
 
-    if not pedidos_do_cliente:
-        print(f"   Cliente {cliente['nome']} não possui pedidos ativos.")
-        pausar()
-        return
+    match pedidos_do_cliente:
+        case []:
+            print(f"   Cliente {cliente['nome']} não possui pedidos ativos.")
+            pausar()
+            return
 
     # --- 3. Exibe pedidos do cliente ---
     print(f"\n   Cliente: {cliente['nome']}")
@@ -208,7 +220,7 @@ def pedido_cancelar(clientes, pedidos):
     for p in pedidos_do_cliente:
         print(f"   #{p['codigo']} - {p['nome_produto']} | Qtd: {p['quantidade']} | Total: R$ {p['total']:.2f} ({p['status']})")
 
-    # --- 4. Busca pelo código (lógica original) ---
+    # --- 4. Busca pelo código ---
     try:
         codigo_busca = int(input("\n   Número do pedido a cancelar: ").strip())
     except ValueError:
@@ -222,21 +234,23 @@ def pedido_cancelar(clientes, pedidos):
             pedido_encontrado = p
             break
 
-    if not pedido_encontrado:
-        print("   Pedido não encontrado.")
-        pausar()
-        return
+    match pedido_encontrado:
+        case None:
+            print("   Pedido não encontrado.")
+            pausar()
+            return
 
     # --- 5. Confirmação ---
     print(f"\n   Pedido #{pedido_encontrado['codigo']} - {pedido_encontrado['nome_produto']}")
     print(f"   Total: R$ {pedido_encontrado['total']:.2f} | Status: {pedido_encontrado['status']}")
     confirma = input("\n   Confirmar cancelamento? (s/n): ").strip().lower()
 
-    if confirma == "s":
-        pedido_encontrado["status"] = "Cancelado"
-        print("   Pedido cancelado com sucesso.")
-    else:
-        print("   Cancelamento abortado.")
+    match confirma:
+        case "s":
+            pedido_encontrado["status"] = "Cancelado"
+            print("   Pedido cancelado com sucesso.")
+        case _:
+            print("   Cancelamento abortado.")
 
     pausar()
 
@@ -244,10 +258,12 @@ def pedido_cancelar(clientes, pedidos):
 def pedido_historico(pedidos, clientes):
     """Lista todos os pedidos traduzindo id_cliente para o nome atual na matriz."""
     cabecalho("Histórico de Pedidos")
-    if not pedidos:
-        print("   Nenhum pedido registrado no sistema ainda.")
-        pausar()
-        return
+
+    match pedidos:
+        case []:
+            print("   Nenhum pedido registrado no sistema ainda.")
+            pausar()
+            return
 
     # Monta índice id_cliente → nome para exibição dinâmica
     indice_clientes = {c["id_cliente"]: c["nome"] for c in clientes}

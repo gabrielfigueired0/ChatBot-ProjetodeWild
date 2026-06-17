@@ -1,0 +1,7 @@
+RELATÓRIO DO CLIENTE 11223344556
+
+Código: 11
+Produto: Vacina Veterinária
+Status: Aguardando confirmação
+Total: R$ 1200.00
+------------------------------

@@ -64,16 +64,17 @@ def submenu_informacoes():
         print("  0. Voltar ao Menu Principal")
 
         opcao = ler_opcao(["1", "2", "3", "4", "0"])
-        if opcao == "1":
-            info_horarios()
-        elif opcao == "2":
-            info_contato()
-        elif opcao == "3":
-            info_politicas()
-        elif opcao == "4":
-            info_faq()
-        elif opcao == "0":
-            break
+        match opcao:
+            case "1":
+                info_horarios()
+            case "2":
+                info_contato()
+            case "3":
+                info_politicas()
+            case "4":
+                info_faq()
+            case "0":
+                break
 
 
 def submenu_pedidos(clientes, pedidos, produtos):
@@ -86,16 +87,17 @@ def submenu_pedidos(clientes, pedidos, produtos):
         print("  0. Voltar ao Menu Principal")
 
         opcao = ler_opcao(["1", "2", "3", "4", "0"])
-        if opcao == "1":
-            pedido_novo(pedidos, clientes, produtos)
-        elif opcao == "2":
-            pedido_rastrear(pedidos)
-        elif opcao == "3":
-            pedido_cancelar(clientes, pedidos)
-        elif opcao == "4":
-            pedido_historico(pedidos, clientes)   # passa clientes para busca dinâmica
-        elif opcao == "0":
-            break
+        match opcao:
+            case "1":
+                pedido_novo(pedidos, clientes, produtos)
+            case "2":
+                pedido_rastrear(pedidos)
+            case "3":
+                pedido_cancelar(clientes, pedidos)
+            case "4":
+                pedido_historico(pedidos, clientes)   # passa clientes para busca dinâmica
+            case "0":
+                break
 
 def submenu_relatorios(clientes, pedidos):
     while True:
@@ -107,15 +109,14 @@ def submenu_relatorios(clientes, pedidos):
 
         opcao = ler_opcao(["1", "2", "0"])
 
-        if opcao == "1":
-            gerar_relatorio_geral(clientes, pedidos)
-
-        elif opcao == "2":
-            cpf = input("CPF do cliente: ")
-            gerar_relatorio_cliente(cpf, pedidos)
-
-        elif opcao == "0":
-            break
+        match opcao:
+            case "1":
+                gerar_relatorio_geral(clientes, pedidos)
+            case "2":
+                cpf = input("CPF do cliente: ")
+                gerar_relatorio_cliente(cpf, pedidos)
+            case "0":
+                break
 
 # ─────────────────────────────────────────────
 #  MENU PRINCIPAL
@@ -137,21 +138,23 @@ def menu_geral():
         
         opcao = ler_opcao(["1", "2", "3", "4", "0"])
 
-        if opcao == "1":
-            submenu_cadastro_suporte(clientes, pedidos)   # passa pedidos para a trava
-        elif opcao == "2":
-            submenu_informacoes()
-        elif opcao == "3":
-            submenu_pedidos(clientes, pedidos, produtos)   # passa clientes e produtos para validação   
-        elif opcao == "4":
-            submenu_relatorios(clientes,pedidos)
-        elif opcao == "0":
-            salvar_clientes(clientes)
-            salvar_pedidos(pedidos)
+        match opcao:
+            case "1":
+                submenu_cadastro_suporte(clientes, pedidos)   # passa pedidos para a trava
+            case "2":
+                submenu_informacoes()
+            case "3":
+                submenu_pedidos(clientes, pedidos, produtos)   # passa clientes e produtos para validação
+            case "4":
+                submenu_relatorios(clientes, pedidos)
+            case "0":
+                salvar_clientes(clientes)
+                salvar_pedidos(pedidos)
 
-            linha()
-            print("  Obrigado por utilizar nosso ChatBot de Atendimento!")
-            linha()
-            break
+                linha()
+                print("  Obrigado por utilizar nosso ChatBot de Atendimento!")
+                linha()
+                break
+
 if __name__ == "__main__":
     menu_geral()

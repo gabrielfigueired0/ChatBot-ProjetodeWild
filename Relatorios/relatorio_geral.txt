@@ -1,10 +1,10 @@
 ========================================
 RELATÓRIO GERAL
-Gerado em: 16/06/2026 21:35
+Gerado em: 16/06/2026 22:57
 ========================================
 
-Total de clientes: 11
-Total de pedidos: 10
+Total de clientes: 12
+Total de pedidos: 11
 
 PEDIDOS
 
@@ -67,4 +67,10 @@ Cliente: João Pedro Ramos
 Produto: Arame Farpado 100m
 Status: Entregue
 Total: R$ 210.00
+------------------------------
+Código: 11
+Cliente: geronimo
+Produto: Vacina Veterinária
+Status: Aguardando confirmação
+Total: R$ 1200.00
 ------------------------------

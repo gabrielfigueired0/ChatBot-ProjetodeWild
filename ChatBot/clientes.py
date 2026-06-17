@@ -172,15 +172,16 @@ def submenu_cadastro_suporte(clientes, pedidos):
 
         opcao = ler_opcao(["1", "2", "3", "4", "5", "0"])
 
-        if opcao == "0":
-            break
-        elif opcao == "1":
-            cadastro_novo_cliente(clientes)
-        elif opcao == "2":
-            listar_clientes(clientes)
-        elif opcao == "3":
-            alterar_cliente(clientes)
-        elif opcao == "4":
-            excluir_cliente(clientes, pedidos)   # passa pedidos para a trava
-        elif opcao == "5":
-            suporte_cliente()
+        match opcao:
+            case "0":
+                break
+            case "1":
+                cadastro_novo_cliente(clientes)
+            case "2":
+                listar_clientes(clientes)
+            case "3":
+                alterar_cliente(clientes)
+            case "4":
+                excluir_cliente(clientes, pedidos)   # passa pedidos para a trava
+            case "5":
+                suporte_cliente()
