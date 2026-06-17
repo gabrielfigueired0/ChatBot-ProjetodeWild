@@ -1,0 +1,70 @@
+========================================
+RELATÓRIO GERAL
+Gerado em: 16/06/2026 21:35
+========================================
+
+Total de clientes: 11
+Total de pedidos: 10
+
+PEDIDOS
+
+Código: 1
+Cliente: Ana Paula Souza
+Produto: Ração para Cavalos
+Status: Aguardando confirmação
+Total: R$ 241.00
+------------------------------
+Código: 2
+Cliente: Bruno Ferreira Lima
+Produto: Adubo Orgânico
+Status: Confirmado
+Total: R$ 135.00
+------------------------------
+Código: 3
+Cliente: Carla Mendes Rocha
+Produto: Enxada
+Status: Entregue
+Total: R$ 59.90
+------------------------------
+Código: 4
+Cliente: Diego Oliveira Cruz
+Produto: Sementes de Capim
+Status: Aguardando confirmação
+Total: R$ 177.50
+------------------------------
+Código: 5
+Cliente: Elaine Costa Pires
+Produto: Saco de Milho 50kg
+Status: Confirmado
+Total: R$ 89.90
+------------------------------
+Código: 6
+Cliente: Fábio Alves Martins
+Produto: Pulverizador Manual
+Status: Cancelado
+Total: R$ 98.75
+------------------------------
+Código: 7
+Cliente: Gabriela Nunes Dias
+Produto: Mangueira p/ Irrigação
+Status: Entregue
+Total: R$ 151.98
+------------------------------
+Código: 8
+Cliente: Henrique Borges Tal
+Produto: Vacina Veterinária
+Status: Aguardando confirmação
+Total: R$ 150.00
+------------------------------
+Código: 9
+Cliente: Isabela Moura Leal
+Produto: Botina de Couro
+Status: Confirmado
+Total: R$ 110.00
+------------------------------
+Código: 10
+Cliente: João Pedro Ramos
+Produto: Arame Farpado 100m
+Status: Entregue
+Total: R$ 210.00
+------------------------------

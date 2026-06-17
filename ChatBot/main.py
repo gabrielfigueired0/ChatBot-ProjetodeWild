@@ -1,5 +1,6 @@
 from validacoes import cabecalho, linha, ler_opcao, pausar
 
+
 from dados_iniciais import (
     clientes_iniciais,
     pedidos_iniciais,
@@ -22,6 +23,10 @@ from persistencia import (
     carregar_pedidos,
     salvar_clientes,
     salvar_pedidos
+)
+from relatorios import (
+    gerar_relatorio_geral,
+    gerar_relatorio_cliente
 )
 
 # ─────────────────────────────────────────────
@@ -92,6 +97,25 @@ def submenu_pedidos(clientes, pedidos, produtos):
         elif opcao == "0":
             break
 
+def submenu_relatorios(clientes, pedidos):
+    while True:
+        cabecalho("RELATÓRIOS")
+
+        print("1. Relatório Geral")
+        print("2. Relatório por Cliente")
+        print("0. Voltar")
+
+        opcao = ler_opcao(["1", "2", "0"])
+
+        if opcao == "1":
+            gerar_relatorio_geral(clientes, pedidos)
+
+        elif opcao == "2":
+            cpf = input("CPF do cliente: ")
+            gerar_relatorio_cliente(cpf, pedidos)
+
+        elif opcao == "0":
+            break
 
 # ─────────────────────────────────────────────
 #  MENU PRINCIPAL
@@ -108,16 +132,19 @@ def menu_geral():
         print("  1. Cadastro e Suporte")
         print("  2. Informações")
         print("  3. Pedidos")
+        print("  4. Emitir Relatórios")
         print("  0. Encerrar Atendimento")
-
-        opcao = ler_opcao(["1", "2", "3", "0"])
+        
+        opcao = ler_opcao(["1", "2", "3", "4", "0"])
 
         if opcao == "1":
             submenu_cadastro_suporte(clientes, pedidos)   # passa pedidos para a trava
         elif opcao == "2":
             submenu_informacoes()
         elif opcao == "3":
-            submenu_pedidos(clientes, pedidos, produtos)   # passa clientes e produtos para validação
+            submenu_pedidos(clientes, pedidos, produtos)   # passa clientes e produtos para validação   
+        elif opcao == "4":
+            submenu_relatorios(clientes,pedidos)
         elif opcao == "0":
             salvar_clientes(clientes)
             salvar_pedidos(pedidos)
