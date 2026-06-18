@@ -102,21 +102,28 @@ def submenu_pedidos(clientes, pedidos, produtos):
 def submenu_relatorios(clientes, pedidos):
     while True:
         cabecalho("RELATÓRIOS")
+        print("  Quem está acessando?")
+        print("  1. Funcionário")
+        print("  2. Cliente")
+        print("  0. Voltar")
 
-        print("1. Relatório Geral")
-        print("2. Relatório por Cliente")
-        print("0. Voltar")
+        perfil = ler_opcao(["1", "2", "0"])
 
-        opcao = ler_opcao(["1", "2", "0"])
-
-        match opcao:
-            case "1":
-                gerar_relatorio_geral(clientes, pedidos)
-            case "2":
-                cpf = input("CPF do cliente: ")
-                gerar_relatorio_cliente(cpf, pedidos)
+        match perfil:
             case "0":
                 break
+            case "1":
+                senha = input("  Senha do funcionário: ")
+                if senha != "1234":
+                    print("  Acesso negado. Senha incorreta.")
+                    pausar()
+                else:
+                    gerar_relatorio_geral(clientes, pedidos)
+                    pausar()
+            case "2":
+                cpf = input("  Seu CPF: ")
+                gerar_relatorio_cliente(cpf, pedidos, clientes)
+                pausar()
 
 # ─────────────────────────────────────────────
 #  MENU PRINCIPAL
@@ -147,6 +154,7 @@ def menu_geral():
                 submenu_pedidos(clientes, pedidos, produtos)   # passa clientes e produtos para validação
             case "4":
                 submenu_relatorios(clientes, pedidos)
+
             case "0":
                 salvar_clientes(clientes)
                 salvar_pedidos(pedidos)
