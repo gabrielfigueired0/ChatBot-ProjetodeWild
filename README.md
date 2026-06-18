@@ -9,10 +9,10 @@ Sistema de atendimento ao cliente via terminal desenvolvido em Python, voltado p
 | Nome | GitHub |
 |------|--------|
 | Gabriel F | [@gabrielfigueired0](https://github.com/gabrielfigueired0) |
-| Gabriel K | — [@nunesdiego784] (https://github.com/nunesdiego784) |
-| Diego | — |
-| Kauan | — |
-| João Tosta | — |
+| Gabriel K | 
+| Diego | — | [@nunesdiego784](https://github.com/nunesdiego784) |
+| Kauan | — | [@kauansilva00dev](https://github.com/kauansilva00dev) |
+| João Tosta | — | [@Biluzim1](https://github.com/Biluzim1)
 
 ---
 
